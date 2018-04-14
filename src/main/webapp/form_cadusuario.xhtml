@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="resources/css/file.css" rel="Stylesheet" />
+	<title>Cadastro de Usuário</title>
+</h:head>
+<h:body>
+	<h:form id="form_cadusuario">
+		<div align="center">
+			<p:commandButton value="lista" action="lista_pessoa" />
+			<p:panelGrid columns="2">
+				<f:facet name="header">
+					<h:outputLabel value="Cadastro de Produtos" />
+				</f:facet>
+				<p:outputLabel value="Nome" />
+				<p:inputText value="#{pontoCtrl.ponto.pont_nome}" required="true" />
+
+				<p:outputLabel value="CPF" />
+				<p:inputMask id="cpf" mask="999.999.999-99"
+					value="#{pontoCtrl.ponto.pont_cpf}" required="true" />
+
+				<p:outputLabel value="Data atual" />
+				<p:calendar readonly="false" id="data"
+					value="#{pontoCtrl.ponto.pont_data_atual}" pattern="dd/MM/yyyy" />
+
+				<p:outputLabel value="Hora Inicial" />
+				<p:inputMask id="pont_hora_ent" mask="99:99" readonly="false"
+					value="#{pontoCtrl.ponto.pont_hora_ent}" required="true" />
+
+				<p:outputLabel value="Hora final" />
+				<p:inputMask id="pont_hora_sai" mask="99:99" readonly="false"
+					value="#{pontoCtrl.ponto.pont_hora_sai}" required="true" />
+
+			</p:panelGrid>
+
+
+			<p:commandButton value="Salvar" update=":form_cadusuario"
+				action="#{pontoCtrl.actionGravar}">
+			</p:commandButton>
+
+
+		</div>
+
+	</h:form>
+
+</h:body>
+</html>

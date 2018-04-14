@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile">
+>
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!-- Bootstrap core CSS -->
+	<link href="resources/css/bootstrap.min.css" rel="stylesheet" />
+	<!-- Custom styles for this template -->
+	<link href="resources/css/starter-template.css" rel="stylesheet" />
+	<title>Cadastro de Pessoas</title>
+</h:head>
+<h:body>
+
+	<header> <!-- Fixed navbar --> <nav
+		class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"> <a
+		class="navbar-brand" href="index.xhtml">Sistema WEb</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarCollapse" aria-controls="navbarCollapse"
+		aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarCollapse">
+		<ul class="navbar-nav mr-auto">
+
+			<li class="nav-item"><a class="nav-link"
+				href="form_produto.xhtml">Cadastrar Produto</a></li>
+
+		</ul>
+	</div>
+	</nav> </header>
+
+	<!-- Begin page content -->
+	<main role="main" class="container">
+	<h1 class="mt-5">Cadastro de Pessoas</h1>
+	<p class="lead">Se Deus é por nós quem será contra nós!</p>
+		<h:form id="formPonto">
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" value="#{pontoCtrl.ponto.nome}"
+					required="true" />
+
+				<p:outputLabel value="CPF" for="cpf" />
+				<p:inputMask id="cpf"  mask="999.999.999-99" value="#{pontoCtrl.ponto.cpf}"
+					required="true" />
+
+				<p:outputLabel value="Data atual" for="data" />
+				<p:calendar readonly="false" id="data" 
+					value="#{pontoCtrl.ponto.data}" pattern="dd/MM/yyyy" />
+
+				<p:outputLabel value="Hora Inicial" for="time1" />
+				<p:inputMask id="time1"  mask="99:99" value="#{pontoCtrl.ponto.time1}"
+					required="true" />
+
+				<p:outputLabel value="Hora Inicial" for="time2" />
+				<p:inputMask id="time2" mask="99:99" value="#{pontoCtrl.ponto.time2}"
+					required="true" />
+
+
+			</p:panelGrid>
+
+			<p:commandButton value="Salve" id="actionGravar"
+				update="dataTabelaPonto, formPonto" action="#{pontoCtrl.actionGravar}">
+			</p:commandButton>
+
+			<h1>Tabela de Produtos</h1>
+
+			<p:dataTable value="#{pontoCtrl.listagem}" var="p" border="1"
+				id="dataTabelaPonto">
+				<p:column headerText="Código">#{p.id}</p:column>
+				<p:column headerText="Nome">#{p.nome}</p:column>
+				<p:column headerText="Data de Entrada">#{p.data}</p:column>
+				<p:column headerText="Horário de Entrada">#{p.time1}</p:column>
+				<p:column headerText="Horário de Saída">#{p.time2}</p:column>
+				<p:column headerText="Ações">
+					<p:commandButton value="Alterar" immediate="true"
+						update="dataTabelaPonto, formPonto"
+						action="#{pontoCtrl.actionAlterar(p)}">
+
+					</p:commandButton>
+					<p:commandButton value="Excluir" update="dataTabelaPonto"
+						immediate="true" action="#{pontoCtrl.actionExcluir(p)}">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</main>
+	<footer class="footer">
+	<div class="container">
+		<span class="text-muted">Adiciona seu Produto...</span>
+	</div>
+	</footer>
+
+</h:body>
+</html>
